@@ -2,13 +2,11 @@ package com.pulseevents.pulse.service;
 
 import com.pulseevents.pulse.model.Events;
 import com.pulseevents.pulse.repository.EventsRepo;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EventsService {
@@ -23,8 +21,13 @@ public class EventsService {
         return repo.insert(events);
     }
 
-    public Events saveEvent(Events events) {
-        Events updateEvent = repo.findById(events.);
-        return repo.save()
+    public Optional<Events> getEvent(String eid){
+        return repo.findById(eid);
     }
+
+    public Events saveEvent(Events event){
+        return repo.save(event);
+    }
+
+
 }

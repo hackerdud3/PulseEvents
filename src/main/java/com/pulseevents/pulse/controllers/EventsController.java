@@ -1,17 +1,14 @@
 package com.pulseevents.pulse.controllers;
 
 import com.pulseevents.pulse.model.Events;
-import com.pulseevents.pulse.repository.EventsRepo;
 import com.pulseevents.pulse.service.EventsService;
-import jdk.jfr.Event;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.swing.text.html.parser.Entity;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class EventsController {
@@ -29,9 +26,36 @@ public class EventsController {
         Events savedEvent = eventsService.addEvent(events);
         return ResponseEntity.ok(savedEvent);
     }
-
-    @PostMapping(value = "/updateevent")
-    public ResponseEntity<Events> updateEvent(@RequestBody Events events){
-        eventsService.saveEvent(events);
+    @GetMapping(value = "/events/{eid}")
+    public ResponseEntity<Events> getSingleEvent(@PathVariable("eid") String eid){
+       Optional<Events> optionalEvent = eventsService.getEvent(eid);
+       if(optionalEvent.isPresent()){
+           Events event = optionalEvent.get();
+           return ResponseEntity.ok(event);
+       }
+       else {
+           return ResponseEntity.notFound().build();
+       }
     }
+
+    @PutMapping(value = "/events/{eid}")
+    public ResponseEntity<Events> updateEvent(@PathVariable("eid") String eid, @RequestBody Events updatedEvent){
+        Optional<Events> optionalEvent = eventsService.getEvent(eid);
+        if(optionalEvent.isPresent()){
+            Events event = optionalEvent.get();
+            event.setEvent_name(updatedEvent.getEvent_name() != null ? updatedEvent.getEvent_name() : event.getEvent_name() );
+            event.setVenue(updatedEvent.getVenue() != null ? updatedEvent.getVenue() : event.getVenue());
+            event.setAttending(updatedEvent.isAttending());
+            event.setNum_attending(updatedEvent.getNum_attending());
+            Events savedEvent = eventsService.saveEvent(event);
+            return ResponseEntity.ok(savedEvent);
+        }
+
+        else {
+            return ResponseEntity.notFound().build();
+        }
+  }
+
+
+
 }

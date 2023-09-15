@@ -17,6 +17,7 @@ public class Events {
     private int num_attending;
 
     public Events() {
+        this.isAttending = false;
     }
 
     public Events(String eid, String event_name, String venue, boolean isAttending, int num_attending) {
