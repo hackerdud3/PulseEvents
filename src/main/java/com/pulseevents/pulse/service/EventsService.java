@@ -13,7 +13,7 @@ public class EventsService {
     @Autowired
     private EventsRepo repo;
 
-    public List<Events> getAllEvents(){
+    public List<Events> getAllEvents() {
         return repo.findAll();
     }
 
@@ -21,13 +21,16 @@ public class EventsService {
         return repo.insert(events);
     }
 
-    public Optional<Events> getEvent(String eid){
+    public Optional<Events> getEvent(String eid) {
         return repo.findById(eid);
     }
 
-    public Events saveEvent(Events event){
+    public Events saveEvent(Events event) {
         return repo.save(event);
     }
 
 
+    public void delete(String eid) {
+        repo.deleteById(eid);
+    }
 }
