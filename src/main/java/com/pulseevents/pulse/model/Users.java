@@ -6,6 +6,9 @@ import jakarta.validation.constraints.Size;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Document(collection = "users")
 public class Users {
     @Id
@@ -21,6 +24,8 @@ public class Users {
     @NotBlank
     @Size(max = 120)
     private String password;
+
+    private Set<Role> roles = new HashSet<>();
 
     public Users() {
     }
