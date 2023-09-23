@@ -10,9 +10,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Document(collection = "users")
-public class Users {
+public class User {
     @Id
-    private String uid;
+    private String id;
     @NotBlank
     @Size(max = 20)
     private String username;
@@ -27,22 +27,30 @@ public class Users {
 
     private Set<Role> roles = new HashSet<>();
 
-    public Users() {
+    public Set<Role> getRoles() {
+        return roles;
     }
 
-    public Users(String uid, String username, String email, String password) {
-        this.uid = uid;
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
+    public User() {
+    }
+
+    public User(String id, String username, String email, String password) {
+        this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
     }
 
-    public String getUid() {
-        return uid;
+    public String getId() {
+        return id;
     }
 
-    public void setUid(String uid) {
-        this.uid = uid;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getUsername() {
@@ -72,7 +80,7 @@ public class Users {
     @Override
     public String toString() {
         return "Users{" +
-                "uid='" + uid + '\'' +
+                "uid='" + id + '\'' +
                 ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
