@@ -27,6 +27,7 @@ public class EventsService {
 
     public Events saveEvent(Events event) {
         return repo.save(event);
+
     }
 
 

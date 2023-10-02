@@ -44,6 +44,15 @@ public class UserDetailsImpl implements UserDetails {
         );
 
     }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return authorities;
@@ -88,6 +97,7 @@ public class UserDetailsImpl implements UserDetails {
        UserDetailsImpl user = (UserDetailsImpl) obj;
        return Objects.equals(id, user.id);
     }
+
 
 
 }
