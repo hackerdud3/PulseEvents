@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.pulseevents</groupId>
-	<artifactId>pulse</artifactId>
+	<artifactId>pulse-backend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>pulse</name>
 	<description>Demo project for Spring Boot</description>

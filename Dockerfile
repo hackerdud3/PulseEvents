@@ -1,7 +1,4 @@
-FROM ubuntu:latest
-LABEL authors="nandi"
 
-ENTRYPOINT ["top", "-b"]
 
 # Use JDK 17 as base image
 FROM openjdk:17-jdk-slim
