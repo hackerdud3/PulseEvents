@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import { Suspense } from "react";
 import { Metadata } from "next";
 import NavBar from "@/Components/nav";
+import AuthProvider from "@/Contexts/Auth";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,10 +22,12 @@ export default function RootLayout({
       <body
         className={`${inter.className} flex h-full w-full justify-start items-start flex-col`}
       >
-        <NavBar />
-        <div className="w-full h-full mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          {children}
-        </div>
+        <AuthProvider>
+          <NavBar />
+          <div className="w-full h-full mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            {children}
+          </div>
+        </AuthProvider>
       </body>
     </html>
   );
