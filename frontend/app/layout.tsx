@@ -24,7 +24,7 @@ export default function RootLayout({
       >
         <AuthProvider>
           <NavBar />
-          <div className="w-full h-full mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="w-full h-full flex flex-col items-center">
             {children}
           </div>
         </AuthProvider>

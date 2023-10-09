@@ -4,11 +4,13 @@ import { Card, TextInput, Title } from "@tremor/react";
 import Link from "next/link";
 import CustomButton from "@/Components/button";
 import { useAuth } from "@/Contexts/Auth";
+import { useRouter } from "next/navigation";
 
 type Props = {};
 
 function Loginpage({}: Props) {
   const { signInWithUsernameandPassword } = useAuth();
+  const router = useRouter();
 
   const loginhandler = async (event: FormEvent) => {
     event.preventDefault();
@@ -17,8 +19,12 @@ function Loginpage({}: Props) {
       username: formData.get("username") as string,
       password: formData.get("password") as string,
     };
-
-    signInWithUsernameandPassword(userData);
+    try {
+      await signInWithUsernameandPassword(userData);
+    } catch (error) {
+      console.log(error);
+    }
+    // router.push("/events");
   };
   return (
     <form

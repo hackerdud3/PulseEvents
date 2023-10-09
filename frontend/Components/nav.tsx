@@ -54,12 +54,14 @@ function NavBar() {
                     className="hover:bg-gray-100"
                   />
                 </Link>
-                <CustomButton
-                  name="Sign Up"
-                  color="bg-slate-900"
-                  textcolor="text-white"
-                  className="hover:bg-slate-700"
-                />
+                <Link href="/signup">
+                  <CustomButton
+                    name="Sign Up"
+                    color="bg-slate-900"
+                    textcolor="text-white"
+                    className="hover:bg-slate-700"
+                  />
+                </Link>
               </div>
               <div className="sm:hidden">
                 <Menu as="div" className="ml-3 relative">
