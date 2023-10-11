@@ -6,16 +6,24 @@ This is a full-stack web application for managing events. The application is bui
 - Secure authentication using Spring Security and JWT Authentication (JSON Web Tokens).
 - Role-based authorization for different user roles (e.g., admin, user, mod).
 - Input validation to ensure data integrity and security.
-- Dockerized for easy deployment and development.
+- Docker for containerization, ensuring consistent and efficient deployment of applications across various environments
+- 
 
 ## Technologies Used
 
-- **Spring Boot**: Provides the backend structure and RESTful API endpoints.
-- **Next.js**: A React framework for building the frontend.
+- **Spring Boot**: Developed the backend structure and RESTful API endpoints.
+- **Java**: Employed Java for core application logic and backend development in conjunction with the Spring Boot framework.
+- **Spring Security**: Configured spring security and implemented JWT authentication.
+- **Next.js**: Used React Framework for building the frontend.
 - **TypeScript**: Ensures type safety throughout the application.
 - **Tailwind CSS**: Utility-first CSS framework for styling the UI.
 - **React**: Library for building the user interface.
-- **MongoDB**: NoSQL database for storing event information.
+- **Redux**: For managing global state, allowing centralized control of the application state, efficiency, and scalability within the react application.
+- **MongoDB**: NoSQL database for storing user, role, and event information.
+- **Docker**: Dockerized for easy deployment and development.
+- **Vercel**: For deployment
+- **Components**: tremor
+
 
 ## Prerequisites
 
