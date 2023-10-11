@@ -1,4 +1,6 @@
-![image](https://github.com/hackerdud3/PulseEvents/assets/28582589/c9c33926-0392-4d7a-81fc-df00783d7764)
+
+![techstack1](https://github.com/hackerdud3/PulseEvents/assets/28582589/6b46b0b6-7e1b-46a2-bbf0-9175033554bf)
+
 # PulseEvents
 
 This is a full-stack web application for managing events. The application is built using Spring Boot, Spring Security, React, Next.js, TypeScript, Tailwind CSS, and MongoDB.
