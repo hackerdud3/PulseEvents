@@ -91,11 +91,3 @@ This is a full-stack web application for managing events. The application is bui
 ## Usage
 
 - Navigate to the application and start managing your events!
-
-## Contributing
-
-Feel free to contribute to this project. Please open an issue or create a pull request.
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
