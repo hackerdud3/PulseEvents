@@ -28,6 +28,7 @@ This is a full-stack web application for managing events. The application is bui
 - Docker for containerization, ensuring consistent and efficient deployment of applications across various environments
 
 
+
 ## Prerequisites
 
 - Node.js and npm installed
