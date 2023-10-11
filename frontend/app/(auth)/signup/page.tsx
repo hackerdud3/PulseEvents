@@ -35,22 +35,23 @@ function SignupPage({}: Props) {
           <input
             type="text"
             name="username"
-            id="username"
-            className="h-10 block w-full rounded-md border border-gray-200 pl-9 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-            placeholder="Username"
-            spellCheck={false}
-          />
-        </div>
-        <div className="rounded-md shadow-sm">
-          <input
-            type="text"
-            name="email"
             id="email"
             className="h-10 block w-full rounded-md border border-gray-200 pl-9 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
             placeholder="Email"
             spellCheck={false}
           />
         </div>
+        <div className="rounded-md shadow-sm">
+          <input
+            type="text"
+            name="name"
+            id="username"
+            className="h-10 block w-full rounded-md border border-gray-200 pl-9 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+            placeholder="Username"
+            spellCheck={false}
+          />
+        </div>
+
         <div className="rounded-md shadow-sm">
           <input
             type="password"
