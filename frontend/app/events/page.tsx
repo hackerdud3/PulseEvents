@@ -2,9 +2,19 @@
 import React, { useEffect, useState } from "react";
 
 import Image from "next/image";
-import { Card, CardContent, CardMedia, Typography } from "@mui/material";
+import {
+  Card,
+  CardContent,
+  CardMedia,
+  IconButton,
+  Typography,
+} from "@mui/material";
 import axios from "axios";
 import { useAuth } from "@/Contexts/Auth";
+import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+import FavoriteOutlinedIcon from "@mui/icons-material/FavoriteOutlined";
+import Eventcard from "@/Components/eventcard";
+import Link from "next/link";
 
 type Props = {};
 
@@ -29,7 +39,12 @@ async function fetchEvents() {
 
 function EventsPage({}: Props) {
   const [events, setEvents] = useState<Event[] | null>(null);
+  const [attending, isAttending] = useState(false);
   const { user } = useAuth();
+
+  const toggleInterested = () => {
+    isAttending(!attending);
+  };
 
   useEffect(() => {
     const loadEvents = async () => {
@@ -41,39 +56,30 @@ function EventsPage({}: Props) {
         console.error("Error fetching events:", error);
       }
     };
-
     loadEvents();
   }, []);
 
   return (
     <div className="w-full flex flex-col item-center justify-center ">
       <div>
-        <img
+        <Image
           src="/event1.jpg"
           alt="pulse wallpaper"
           className="w-full h-[30rem] object-cover object-bottom"
         />
       </div>
       <div className="flex flex-col w-full">
-        <div className="w-full flex items-center justify-center">
-          Upcoming Events
+        <div className="w-full flex items-center justify-center p-8 my-12 ">
+          <h1 className="text-4xl font-extrabold">Upcoming Events</h1>
+        </div>
+        <div>
+          <Link href="events/addevent">
+            <button>Add event</button>
+          </Link>
         </div>
         <div className="w-full flex flex-wrap items-center justify-center px-10 gap-8">
           {events?.map((item) => (
-            <Card
-              sx={{
-                width: 350,
-                display: "flex",
-                flexDirection: "column",
-              }}
-            >
-              <CardMedia component="img" src="/event1.jpg" />
-              <CardContent sx={{ flex: "1 0 auto" }}>
-                <Typography component="div" variant="h4">
-                  {item.event_name}
-                </Typography>
-              </CardContent>
-            </Card>
+            <Eventcard key={item.eid} item={item} />
           ))}
         </div>
       </div>
