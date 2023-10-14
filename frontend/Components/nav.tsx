@@ -83,7 +83,7 @@ function NavBar() {
                       aria-labelledby="menu-button"
                     >
                       {navigation.map((item) => (
-                        <Link href={item.href}>
+                        <Link href={item.href} key={item.name}>
                           <Menu.Item>
                             {({ active }) => (
                               <button

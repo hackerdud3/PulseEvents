@@ -3,8 +3,15 @@ package com.pulseevents.pulse.model;
 import jakarta.annotation.Generated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import org.bson.types.Binary;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.data.mongodb.core.mapping.FieldType;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Arrays;
+import java.util.Date;
 
 @Document(collection = "events")
 public class Events {
@@ -12,20 +19,44 @@ public class Events {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String  eid;
     private String event_name;
+
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    private Date createdDate = new Date();
     private String venue;
-    private boolean isAttending;
+    private boolean attending;
     private int num_attending;
 
-    public Events() {
-        this.isAttending = false;
+    private Binary eventImage;
+
+    public Binary getEventImage() {
+        return eventImage;
     }
 
-    public Events(String eid, String event_name, String venue, boolean isAttending, int num_attending) {
+    public void setEventImage(Binary eventImage) {
+        this.eventImage = eventImage;
+    }
+
+    public Events() {
+        this.attending = false;
+    }
+
+    public Events(String eid, String event_name, Date createdDate, String venue, boolean attending, int num_attending, Binary eventImage) {
         this.eid = eid;
         this.event_name = event_name;
+        this.createdDate = createdDate;
         this.venue = venue;
-        this.isAttending = isAttending;
+        this.attending = attending;
         this.num_attending = num_attending;
+        this.eventImage = eventImage;
+    }
+
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
     }
 
     public String getEid() {
@@ -53,11 +84,11 @@ public class Events {
     }
 
     public boolean isAttending() {
-        return isAttending;
+        return attending;
     }
 
     public void setAttending(boolean attending) {
-        isAttending = attending;
+        this.attending = attending;
     }
 
     public int getNum_attending() {
@@ -73,9 +104,11 @@ public class Events {
         return "Events{" +
                 "eid='" + eid + '\'' +
                 ", event_name='" + event_name + '\'' +
+                ", createdDate=" + createdDate +
                 ", venue='" + venue + '\'' +
-                ", isAttending=" + isAttending +
+                ", attending=" + attending +
                 ", num_attending=" + num_attending +
+                ", eventImage=" + eventImage +
                 '}';
     }
 }

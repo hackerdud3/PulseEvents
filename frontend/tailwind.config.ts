@@ -19,6 +19,7 @@ const config: Config = {
         h2: "1.125rem",
         h3: "1rem",
         h4: "0.875rem",
+        h5: "0.325rem",
         p: "1rem",
       },
       lineHeight: {
@@ -26,6 +27,7 @@ const config: Config = {
         h2: "1.75rem",
         h3: "1.5rem",
         h4: "1.25rem",
+        h5: "0.625rem",
         p: "1.5rem",
       },
       height: {
