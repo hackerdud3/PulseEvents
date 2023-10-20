@@ -1,10 +1,10 @@
-"use client";
-import React, { FormEvent } from "react";
-import { Card, TextInput, Title } from "@tremor/react";
-import Link from "next/link";
-import CustomButton from "@/Components/button";
-import { useAuth } from "@/Contexts/Auth";
-import { useRouter } from "next/navigation";
+'use client';
+import React, { FormEvent } from 'react';
+import { Card, TextInput, Title } from '@tremor/react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import CustomButton from '@/app/components/button';
+import { useAuth } from '@/Contexts/Auth';
 
 type Props = {};
 
@@ -16,8 +16,8 @@ function Loginpage({}: Props) {
     event.preventDefault();
     const formData = new FormData(event.target as HTMLFormElement);
     const userData = {
-      username: formData.get("username") as string,
-      password: formData.get("password") as string,
+      username: formData.get('username') as string,
+      password: formData.get('password') as string
     };
     try {
       await signInWithUsernameandPassword(userData);

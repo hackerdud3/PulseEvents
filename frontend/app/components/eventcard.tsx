@@ -1,15 +1,15 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   Card,
   CardMedia,
   CardContent,
   Typography,
-  IconButton,
-} from "@mui/material";
-import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
-import FavoriteOutlinedIcon from "@mui/icons-material/FavoriteOutlined";
-import axios from "axios";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
+  IconButton
+} from '@mui/material';
+import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
+import FavoriteOutlinedIcon from '@mui/icons-material/FavoriteOutlined';
+import axios from 'axios';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 type Props = {
   item: any;
@@ -21,7 +21,7 @@ const Eventcard = (props: Props) => {
 
   const createdDate = new Date(event.createdDate);
 
-  const month = createdDate.toLocaleString("en-US", { month: "long" });
+  const month = createdDate.toLocaleString('en-US', { month: 'long' });
   const date = createdDate.getDate();
   const hours = createdDate.getHours();
   const minutes = createdDate.getMinutes();
@@ -49,27 +49,27 @@ const Eventcard = (props: Props) => {
         sx={{
           width: 380,
           height: 350,
-          display: "flex",
-          flexDirection: "column",
+          display: 'flex',
+          flexDirection: 'column'
         }}
       >
         <CardMedia
           component="img"
           src="/event1.jpg"
-          sx={{ position: "relative" }}
+          sx={{ position: 'relative' }}
         />
         <Card
           sx={{
-            padding: "0px 16px",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-            position: "absolute",
+            padding: '0px 16px',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            position: 'absolute',
             width: 120,
             height: 80,
-            bottom: "110px",
-            right: "12px",
+            bottom: '110px',
+            right: '12px'
           }}
         >
           <h1 className="text-violet-500 font-semibold text-3xl">
@@ -80,21 +80,21 @@ const Eventcard = (props: Props) => {
 
         <CardContent
           sx={{
-            display: "flex",
-            gap: "16px",
-            justifyContent: "space-between",
+            display: 'flex',
+            gap: '16px',
+            justifyContent: 'space-between'
           }}
         >
           <Card
             className=" font-semibold bg-slate-50"
             sx={{
-              padding: "0px 16px",
+              padding: '0px 16px',
               height: 60,
               width: 70,
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center'
             }}
           >
             <h4>{month}</h4>
@@ -104,7 +104,7 @@ const Eventcard = (props: Props) => {
             <div className="flex flex-col justify-center items-start">
               <div>
                 <Typography
-                  sx={{ display: "flex", fontWeight: 900, fontSize: "20px" }}
+                  sx={{ display: 'flex', fontWeight: 900, fontSize: '20px' }}
                   component="div"
                 >
                   {event?.event_name}
@@ -115,7 +115,7 @@ const Eventcard = (props: Props) => {
                   variant="subtitle1"
                   color="text.secondary"
                   component="div"
-                  sx={{ display: "flex", gap: "2px", alignItems: "center" }}
+                  sx={{ display: 'flex', gap: '2px', alignItems: 'center' }}
                 >
                   <LocationOnIcon fontSize="small" />
                   {event?.venue}
@@ -137,7 +137,7 @@ const Eventcard = (props: Props) => {
                 variant="h5"
                 color="text.secondary"
                 component="div"
-                sx={{ fontSize: "14px", position: "absolute", bottom: "8px" }}
+                sx={{ fontSize: '14px', position: 'absolute', bottom: '8px' }}
               >
                 interested
               </Typography>
