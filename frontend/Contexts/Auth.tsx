@@ -1,7 +1,7 @@
-"use client";
-import axios from "axios";
-import { useRouter } from "next/navigation";
-import React, { ReactNode, createContext, useContext, useState } from "react";
+'use client';
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
+import React, { ReactNode, createContext, useContext, useState } from 'react';
 
 type Props = {
   children: ReactNode;
@@ -18,9 +18,9 @@ interface AuthContextProps {
 const AuthContext = createContext<AuthContextProps>({
   signInWithUsernameandPassword: async () => {},
   signUpUser: async () => {},
-  message: "",
+  message: '',
   error: false,
-  user: null,
+  user: null
 });
 
 export function useAuth() {
@@ -28,7 +28,7 @@ export function useAuth() {
 }
 
 function AuthProvider({ children }: Props) {
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState('');
   const [error, setError] = useState(false);
   const [user, setuser] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -40,22 +40,22 @@ function AuthProvider({ children }: Props) {
       setLoading(true);
 
       const response = await axios.post(
-        "http://localhost:8080/api/auth/login",
+        'http://localhost:8080/api/auth/login',
         userData
       );
       if (response.status === 200) {
         setLoading(false);
-        setMessage("Sign In Successful...");
+        setMessage('Sign In Successful...');
         setError(false);
         setuser(response.data);
-        localStorage.setItem("userData", JSON.stringify(response.data));
-        router.push("/events");
+        localStorage.setItem('userData', JSON.stringify(response.data));
+        router.push('/events');
       } else {
         setError(true);
       }
     } catch (error) {
       setError(true);
-      setMessage("Sign In unsuccessful! Please try again");
+      setMessage('Sign In unsuccessful! Please try again');
     } finally {
       setLoading(false);
     }
@@ -64,19 +64,19 @@ function AuthProvider({ children }: Props) {
   const signUpUser = async (userData: any) => {
     try {
       const response = await axios.post(
-        "http://localhost:8080/api/auth/signup",
+        'http://localhost:8080/api/auth/signup',
         userData
       );
 
       if (response.status === 200) {
-        setMessage("Sign Up successful!");
+        setMessage('Sign Up successful!');
         setError(false);
       } else {
         setError(true);
       }
     } catch (error) {
       setError(true);
-      setMessage("Cannot register user");
+      setMessage('Cannot register user');
     }
   };
 
@@ -85,7 +85,7 @@ function AuthProvider({ children }: Props) {
     signUpUser,
     message,
     error,
-    user,
+    user
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

@@ -1,6 +1,6 @@
-"use client";
-import React from "react";
-import { Button } from "@tremor/react";
+'use client';
+import React from 'react';
+import { Button } from '@tremor/react';
 
 type Props = {
   name: string;
@@ -8,7 +8,7 @@ type Props = {
   textcolor: string;
   className?: string;
 
-  type?: "button" | "submit" | "reset";
+  type?: 'button' | 'submit' | 'reset';
 };
 
 const CustomButton = (props: Props) => {
@@ -16,7 +16,7 @@ const CustomButton = (props: Props) => {
     <Button
       type={props.type}
       size="md"
-      className={`${props.color} px-4 py-2 rounded-md justify-center items-center  ${props.textcolor} ${props.className}`}
+      className={`${props.color} px-4 py-2 rounded-md justify-center items-center ${props.textcolor} ${props.className}`}
     >
       {props.name}
     </Button>

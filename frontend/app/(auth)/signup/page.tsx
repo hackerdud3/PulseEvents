@@ -1,10 +1,11 @@
-"use client";
-import React, { FormEvent } from "react";
-import { Card, TextInput, Title } from "@tremor/react";
-import Link from "next/link";
-import CustomButton from "@/Components/button";
-import axios from "axios";
-import { useAuth } from "@/Contexts/Auth";
+'use client';
+import React, { FormEvent } from 'react';
+import { Card, TextInput, Title } from '@tremor/react';
+import Link from 'next/link';
+
+import axios from 'axios';
+import { useAuth } from '@/Contexts/Auth';
+import CustomButton from '@/app/components/button';
 
 type Props = {};
 
@@ -16,9 +17,9 @@ function SignupPage({}: Props) {
 
     const formData = new FormData(event.target as HTMLFormElement);
     const userData = {
-      username: formData.get("username") as string,
-      email: formData.get("email") as string,
-      password: formData.get("password") as string,
+      username: formData.get('username') as string,
+      email: formData.get('email') as string,
+      password: formData.get('password') as string
     };
     signUpUser(userData);
   };
