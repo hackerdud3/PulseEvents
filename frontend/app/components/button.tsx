@@ -16,7 +16,7 @@ const CustomButton = (props: Props) => {
     <Button
       type={props.type}
       size="md"
-      className={`${props.color} px-4 py-2 rounded-md justify-center items-center ${props.textcolor} ${props.className}`}
+      className={`${props.color} px-4 py-2 h-10 rounded-md justify-center items-center ${props.textcolor} ${props.className}`}
     >
       {props.name}
     </Button>
