@@ -1,0 +1,11 @@
+[submodule "frontend"]
+	path = frontend
+	url = https://github.com/hackerdud3/PulseEvents.git
+
+[submodule "frontend"]
+	url = https://github.com/hackerdud3/PulseEvents.git
+	path = frontend
+
+[submodule "backend"]
+	url = https://github.com/hackerdud3/PulseEvents.git
+	path = backend
