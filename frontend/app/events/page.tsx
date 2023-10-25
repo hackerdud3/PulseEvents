@@ -108,7 +108,9 @@ function EventsPage({}: Props) {
             className="overflow-x-auto whitespace-nowrap relative"
           >
             <div id="scroll-content" className="inline-block">
-              {events?.map((item) => <EveCard item={item} />)}
+              {events?.map((item, index) => (
+                <EveCard item={item} key={index} />
+              ))}
             </div>
           </div>
           <IconButton
