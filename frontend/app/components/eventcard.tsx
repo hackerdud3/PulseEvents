@@ -47,10 +47,11 @@ const Eventcard = (props: Props) => {
     <div className="relative">
       <Card
         sx={{
-          width: 380,
-          height: 350,
+          maxWidth: 380,
+          maxheight: 350,
           display: 'flex',
-          flexDirection: 'column'
+          flexDirection: 'column',
+          borderRadius: '10px'
         }}
       >
         <CardMedia
@@ -60,19 +61,19 @@ const Eventcard = (props: Props) => {
         />
         <Card
           sx={{
-            padding: '0px 16px',
+            padding: '8px 16px',
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
             alignItems: 'center',
             position: 'absolute',
-            width: 120,
-            height: 80,
+            width: 100,
+            height: 70,
             bottom: '110px',
             right: '12px'
           }}
         >
-          <h1 className="text-violet-500 font-semibold text-3xl">
+          <h1 className="text-violet-500 font-semibold text-2xl">
             {props?.item?.num_attending}
           </h1>
           <h2 className="text-violet-500 font-semibold">Attending</h2>
@@ -81,8 +82,7 @@ const Eventcard = (props: Props) => {
         <CardContent
           sx={{
             display: 'flex',
-            gap: '16px',
-            justifyContent: 'space-between'
+            gap: '16px'
           }}
         >
           <Card
@@ -100,24 +100,30 @@ const Eventcard = (props: Props) => {
             <h4>{month}</h4>
             <h4>{date}</h4>
           </Card>
-          <div className="flex-1 overflow-hidden text-ellipsis whitespace-nowrap justify-between">
+          <div className="flex-1 overflow-hidden text-ellipsis whitespace-nowrap">
             <div className="flex flex-col justify-center items-start">
               <div>
                 <Typography
-                  sx={{ display: 'flex', fontWeight: 900, fontSize: '20px' }}
+                  sx={{ display: 'flex', fontWeight: 500, fontSize: '20px' }}
                   component="div"
                 >
                   {event?.event_name}
                 </Typography>
               </div>
-              <div>
+              <div className="">
                 <Typography
                   variant="subtitle1"
                   color="text.secondary"
                   component="div"
-                  sx={{ display: 'flex', gap: '2px', alignItems: 'center' }}
+                  sx={{
+                    display: 'flex',
+                    gap: '2px',
+                    alignItems: 'center',
+                    fontSize: '15px',
+                    justifyContent: 'center'
+                  }}
                 >
-                  <LocationOnIcon fontSize="small" />
+                  <LocationOnIcon sx={{ fontSize: '18px' }} />
                   {event?.venue}
                 </Typography>
               </div>
