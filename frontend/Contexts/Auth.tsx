@@ -66,6 +66,8 @@ function AuthProvider({ children }: Props) {
         userData
       );
       if (response.status === 200) {
+        console.log(response.data);
+        setUser(response.data);
         setLoading(false);
         setMessage('Sign In Successful...');
         setError(false);
