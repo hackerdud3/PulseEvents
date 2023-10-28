@@ -1,4 +1,4 @@
-import { Disclosure } from '@headlessui/react';
+import { Disclosure, Menu } from '@headlessui/react';
 import React, { useState } from 'react';
 import { ChevronUpIcon } from '@heroicons/react/20/solid';
 import Image from 'next/image';
@@ -15,7 +15,6 @@ type Props = {
 const EveCard = (props: Props) => {
   const [attending, isAttending] = useState<boolean>(props.item.attending);
   const [event, setEvent] = useState(props?.item);
-  console.log(props.item.eventImage);
 
   const createdDate = new Date(event.createdDate);
 
@@ -47,11 +46,31 @@ const EveCard = (props: Props) => {
   };
 
   return (
-    <div className="min-w-md w-[362px] inline-block mr-4 ">
+    <div className="min-w-md w-[362px] inline-block">
       <Disclosure>
         {({ open }) => (
           <>
             <Disclosure.Button className="flex flex-col w-full h-72 rounded-lg bg-white shadow-sm text-left text-sm font-medium hover:bg-gray-100 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75">
+              {/* <Menu as="div" className="absolute">
+                <div>
+                  <Menu.Button>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="w-6 h-6 "
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z"
+                      />
+                    </svg>
+                  </Menu.Button>
+                </div>
+              </Menu> */}
               <div className="h-36 w-full ">
                 <Image
                   width={1000}
@@ -61,7 +80,8 @@ const EveCard = (props: Props) => {
                   className="w-full h-36 rounded-tl-lg rounded-tr-lg overflow-hidden object-cover object-bottom "
                 />
               </div>
-              <div className="m-4 h-full w-full justify-between flex flex-col ">
+
+              <div className="p-4 h-full w-full justify-between flex flex-col ">
                 <div className="flex justify-start items-start gap-6">
                   {/* calender card */}
                   <Card

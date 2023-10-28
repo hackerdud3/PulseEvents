@@ -13,7 +13,7 @@ const navigation = [
   { name: 'Events', href: '/events' }
 ];
 
-const menu = ['Profile', 'Settings', 'Logout'];
+const menu = ['Profile', 'Your Events', 'Settings', 'Logout'];
 
 export default function NavBar() {
   const { user, logout } = useAuth();
