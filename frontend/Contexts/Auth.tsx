@@ -109,6 +109,7 @@ function AuthProvider({ children }: Props) {
       setUser(null);
       setMessage('Logged out successfully');
       setError(false);
+      setLoading(false);
       router.push('/signin');
     } catch (error) {
       setError(true);

@@ -15,8 +15,8 @@ type Event = {
   userId: string;
 };
 
-function useFetchUserEvents({ userId }: Props) {
-  const [userEvents, setUserEvents] = useState<Event[]>([]);
+export default function useFetch({ userId }: Props) {
+  const [events, setUserEvents] = useState<Event[]>([]);
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -32,7 +32,5 @@ function useFetchUserEvents({ userId }: Props) {
     fetchEvents();
   }, [userId]);
 
-  return userEvents;
+  return events;
 }
-
-export default useFetchUserEvents;

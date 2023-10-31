@@ -1,15 +1,11 @@
 'use client';
-import useFetchUserEvents from '@/Hooks/fetchUserEvents';
+import React, { useState, useEffect } from 'react';
+import useFetch from '@/Hooks/fetchUserEve';
 import EveCard from '@/app/components/card';
-import { Disclosure } from '@headlessui/react';
-import { Box, IconButton } from '@mui/material';
-import React from 'react';
+import { Box } from '@mui/material';
 
-type Props = {};
-
-const page = (props: Props) => {
+const Page = () => {
   const storedUserData = localStorage.getItem('userData');
-
   let userId = null;
 
   if (storedUserData) {
@@ -18,14 +14,13 @@ const page = (props: Props) => {
   }
   console.log(userId);
 
-  const myEvents = useFetchUserEvents({ userId });
+  const events = useFetch({ userId });
 
   return (
     <div className="flex flex-col w-full mt-12 ">
       <div className="flex gap-12  ">
         <div className="w-[480px]">
           <h1 className="text-2xl font-semibold mb-4">Filters</h1>
-
           <Box
             sx={{
               backgroundColor: 'white',
@@ -41,14 +36,8 @@ const page = (props: Props) => {
         <div className="w-full justify-end items-start">
           <h1 className="text-2xl font-semibold mb-4">Your Created Events</h1>
           <div className="flex flex-wrap items-center gap-4">
-            {myEvents?.map((item, index) => (
-                <div>
-                    <IconButton>
-
-                </IconButton>
-                    <EveCard item={item} key={index}>
-                        </EveCard></div>
-              
+            {events?.map((item, index) => (
+              <EveCard item={item} key={index}></EveCard>
             ))}
           </div>
         </div>
@@ -57,4 +46,4 @@ const page = (props: Props) => {
   );
 };
 
-export default page;
+export default Page;

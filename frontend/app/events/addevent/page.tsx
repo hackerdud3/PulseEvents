@@ -4,6 +4,8 @@ import { Button } from '@mui/material';
 import React, { FormEvent, useState } from 'react';
 import axios from 'axios';
 import { useAuth } from '@/Contexts/Auth';
+import Datepicker from '@/app/components/datepicker';
+import { AnyAaaaRecord } from 'dns';
 
 const AddEvent = () => {
   const [image, setImage] = useState<File | null>(null);
@@ -13,18 +15,56 @@ const AddEvent = () => {
     event_name: '',
     venue: '',
     num_attending: '',
-    attending: true
+    date: '',
+    month: '',
+    day: '',
+    time: ''
   });
+
+  const [eventdate, setDate] = useState('');
+
+  const handleDateChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = e.target;
+    if (name === 'date') {
+      const formattedDate = formatDate(e.target.value);
+      setDate(e.target.value);
+      setFormData({
+        ...formData,
+        month: formattedDate.month,
+        date: formattedDate.date,
+        day: formattedDate.day
+      });
+    } else if (name === 'time') {
+      setFormData({ ...formData, time: e.target.value });
+    }
+  };
+
+  const formatDate = (dateString: string) => {
+    const dateObj = new Date(dateString);
+    dateObj.setDate(dateObj.getDate() + 1);
+
+    const month = new Intl.DateTimeFormat('en-US', { month: 'long' }).format(
+      dateObj
+    );
+    const date = dateObj.getDate().toString();
+    const day = new Intl.DateTimeFormat('en-US', { weekday: 'long' }).format(
+      dateObj
+    );
+
+    return { month, date, day };
+  };
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
-    console.log(formData);
     const { name, value } = e.target;
     setFormData({
       ...formData,
       [name]: value
     });
+    console.log(formData);
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,6 +76,7 @@ const AddEvent = () => {
 
   const handleSubmit = async (event: FormEvent) => {
     const token = user.token;
+
     event.preventDefault();
     if (!image) {
       console.error('No image selected');
@@ -43,7 +84,7 @@ const AddEvent = () => {
     }
 
     const formDataToSend = new FormData();
-    formDataToSend.append('eventImage', image); // Append the file
+    formDataToSend.append('eventImage', image);
     formDataToSend.append('eventData', JSON.stringify(formData));
     formDataToSend.append('token', token);
 
@@ -105,18 +146,32 @@ const AddEvent = () => {
         </div>
 
         <div className="flex justify-center items-center gap-8 w-full">
-          {/* <div className="rounded-md shadow-sm w-full">
+          <div className="rounded-md shadow-sm w-full">
             <input
               type="date"
               name="date"
               id="date"
-              value={formData.date}
-              onChange={handleChange}
+              value={eventdate}
+              onChange={handleDateChange}
               className="h-10 block w-full rounded-md border border-gray-200 px-4 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
               placeholder="Date"
               spellCheck={false}
             />
-          </div> */}
+            {/* <Datepicker value={formData.date} name="date" /> */}
+          </div>
+
+          <div>
+            <input
+              type="time"
+              name="time"
+              id="time"
+              value={formData.time}
+              onChange={handleDateChange}
+              className="h-10 block w-full rounded-md border border-gray-200 px-4 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+              placeholder="Time"
+              spellCheck={false}
+            />
+          </div>
         </div>
 
         <div className="flex w-full justify-center items-center gap-8">
@@ -133,7 +188,7 @@ const AddEvent = () => {
             />
           </div>
 
-          <div className="rounded-md shadow-sm w-full">
+          {/* <div className="rounded-md shadow-sm w-full">
             <select
               name="attending"
               id="attending"
@@ -144,7 +199,7 @@ const AddEvent = () => {
               <option value="true">Yes</option>
               <option value="false">No</option>
             </select>
-          </div>
+          </div> */}
         </div>
 
         <div className="rounded-md shadow-sm w-full">

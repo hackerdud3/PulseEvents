@@ -7,30 +7,40 @@ import axios from 'axios';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { FavoriteBorderOutlined } from '@mui/icons-material';
 import FavoriteOutlined from '@mui/icons-material/FavoriteOutlined';
+import { useAuth } from '@/Contexts/Auth';
 
 type Props = {
   item: any;
 };
 
 const EveCard = (props: Props) => {
-  const [attending, isAttending] = useState<boolean>(props.item.attending);
+  const { user } = useAuth();
+  const interested = new Set(
+    props.item.attending.map((item: any) => item.userId)
+  );
+  const [attending, isAttending] = useState<boolean>(interested.has(user?.id));
+  const [liked, setLiked] = useState(new Set());
   const [event, setEvent] = useState(props?.item);
-
   const createdDate = new Date(event.createdDate);
-
-  const month = createdDate.toLocaleString('en-US', { month: 'long' });
-  const substring = month.slice(0, 3);
-  const date = createdDate.getDate();
-  const hours = createdDate.getHours();
+  const substring = props.item.month.slice(0, 3);
   const minutes = createdDate.getMinutes();
+
   const imageData =
     props.item && props.item.eventImage
       ? `data:image/jpeg;base64,${props.item.eventImage.toString('base64')}`
-      : ''; // Set a default value if eventImage is null or undefined
-
+      : '';
   const toggleInterest = () => {
     isAttending(!attending);
-    setEvent({ ...event, attending: attending });
+    const newLiked = new Set(liked); // Create a new set with the current liked users
+
+    if (attending) {
+      newLiked.add(user.id);
+    } else {
+      newLiked.delete(user.id);
+    }
+
+    setLiked(newLiked);
+    setEvent({ ...event, attending: Array.from(newLiked) }); // Convert the Set back to an array if needed
     updateEvent(event);
   };
 
@@ -38,7 +48,12 @@ const EveCard = (props: Props) => {
     try {
       axios.put(
         `http://localhost:8080/event/${updatedEvent?.eid}`,
-        updatedEvent
+        updatedEvent,
+        {
+          params: {
+            uid: user.id
+          }
+        }
       );
     } catch (error) {
       console.log(error);
@@ -79,7 +94,7 @@ const EveCard = (props: Props) => {
                     <div className="w-full h-4 rounded-sm bg-red-500"></div>
                     <div className="flex justify-center items-center flex-col">
                       <h4 className=" font-light uppercase">{substring}</h4>
-                      <h3 className=" text-2xl">{date}</h3>
+                      <h3 className=" text-2xl">{props.item.date}</h3>
                     </div>
                   </Card>
 
@@ -89,7 +104,7 @@ const EveCard = (props: Props) => {
                     </h1>
 
                     <Typography sx={{ fontSize: '14px' }}>
-                      {hours} : {minutes}
+                      {props.item.time}
                     </Typography>
                   </div>
                 </div>
