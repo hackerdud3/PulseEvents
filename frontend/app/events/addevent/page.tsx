@@ -3,9 +3,11 @@
 import { Button } from '@mui/material';
 import React, { FormEvent, useState } from 'react';
 import axios from 'axios';
+import { useAuth } from '@/Contexts/Auth';
 
 const AddEvent = () => {
   const [image, setImage] = useState<File | null>(null);
+  const { user } = useAuth();
 
   const [formData, setFormData] = useState({
     event_name: '',
@@ -33,6 +35,7 @@ const AddEvent = () => {
   };
 
   const handleSubmit = async (event: FormEvent) => {
+    const token = user.token;
     event.preventDefault();
     if (!image) {
       console.error('No image selected');
@@ -42,6 +45,7 @@ const AddEvent = () => {
     const formDataToSend = new FormData();
     formDataToSend.append('eventImage', image); // Append the file
     formDataToSend.append('eventData', JSON.stringify(formData));
+    formDataToSend.append('token', token);
 
     try {
       const response = await axios.post(
@@ -49,6 +53,7 @@ const AddEvent = () => {
         formDataToSend,
         {
           headers: {
+            'Access-Control-Allow-Origin': '*',
             'Content-Type': 'multipart/form-data'
           }
         }

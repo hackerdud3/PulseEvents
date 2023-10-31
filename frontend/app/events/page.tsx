@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef, lazy } from 'react';
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import Image from 'next/image';
 import {
@@ -14,77 +14,78 @@ import axios from 'axios';
 import { useAuth } from '../../Contexts/Auth';
 
 import Link from 'next/link';
-import Eventcard from '../components/eventcard';
-import EveCard from '../components/card';
+
 import { ButtonProps } from '@tremor/react';
 import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRounded';
 import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
+import './event.css';
+import EveCard from '../components/card';
+import useFetchEvents from '@/Hooks/fetchEvents';
+import { Disclosure } from '@headlessui/react';
 
 type Props = {};
 
-type Event = {
-  eid: string;
-  event_name: string;
-  venue: string;
-  isAttending: boolean;
-  num_attending: number;
-  eventImage: string;
-};
-
-async function fetchEvents() {
-  try {
-    const response = await axios.get<Event[]>('http://localhost:8080/events');
-
-    return response.data;
-  } catch (error) {
-    console.error('Error fetching events:', error);
-    throw error;
-  }
+async function fetchGoogleEvents() {
+  const response = await axios.get(
+    'https://www.googleapis.com/calendar/v3/calendars/calendarId/events/eventId'
+  );
+  return response.data;
 }
 
 const AddButton = styled(Button)<ButtonProps>(({ theme }) => ({
   color: 'white',
   padding: '6px 10px',
+  backgroundColor: '#3d48da',
   '&:hover': {
     backgroundColor: '#434ff0'
   }
 }));
 
 function EventsPage({}: Props) {
-  const [events, setEvents] = useState<Event[] | null>(null);
   const [attending, isAttending] = useState(false);
-  const { user } = useAuth();
+  const containerRef = useRef<any>(null);
+  const [googleEvents, setGoogleEvents] = useState<any>(null);
+  const storedUserData = localStorage.getItem('userData');
+
+  let token = null;
+
+  if (storedUserData) {
+    const userData = JSON.parse(storedUserData);
+    token = userData.token;
+  }
+  const events = useFetchEvents({ token });
 
   const toggleInterested = () => {
     isAttending(!attending);
   };
 
-  useEffect(() => {
-    const loadEvents = async () => {
-      try {
-        const eventsData = await fetchEvents();
-        setEvents(eventsData);
-        localStorage.setItem('Events', JSON.stringify(eventsData));
-      } catch (error) {
-        console.error('Error fetching events:', error);
+  const handleArrowButtonClicked = (direction: string) => {
+    const container = containerRef.current;
+    const scrollAmount = container.offsetWidth + 10; // Width of the container
+
+    if (container) {
+      if (direction === 'left') {
+        container.scrollLeft -= scrollAmount;
+      } else if (direction === 'right') {
+        container.scrollLeft += scrollAmount;
       }
-    };
-    loadEvents();
-  }, []);
+    }
+  };
 
   return (
-    <div className="w-full flex flex-col item-center justify-center mt-16 ">
+    <div className="w-full flex flex-col item-center justify-center mt-12 ">
       <div>
         <Image
-          src="/event1.jpg"
+          src="/6291563.jpeg"
           alt="pulse wallpaper"
-          className="w-full h-[30rem] object-cover object-bottom"
+          className="w-full h-[20rem] object-cover object-center"
           width={1000}
-          height={50}
+          height={5}
+          loading="lazy"
         />
       </div>
 
-      <div className="flex flex-col w-full px-4 sm:px-40">
+      <div className="flex flex-col w-full">
         {/* <Eventcard key={item.eid} item={item} /> */}
 
         <div className="w-full flex items-center justify-center my-8 ">
@@ -92,10 +93,7 @@ function EventsPage({}: Props) {
             <h1 className="text-lg sm:text-2xl font-bold">Upcoming Events</h1>
 
             <Link href="events/addevent">
-              <AddButton
-                className="bg-[#3d48da]"
-                startIcon={<AddRoundedIcon />}
-              >
+              <AddButton className="bg-black" startIcon={<AddRoundedIcon />}>
                 Add Event
               </AddButton>
             </Link>
@@ -104,32 +102,41 @@ function EventsPage({}: Props) {
 
         <div className="relative">
           <div
+            ref={containerRef}
             id="scroll-container"
-            className="overflow-x-auto whitespace-nowrap relative"
+            className="overflow-hidden whitespace-nowrap relative"
           >
-            <div id="scroll-content" className="inline-block">
+            <div
+              id="scroll-content"
+              className=" transition left-transition right-transition duration-1000 ease overscroll-contain grid-flow-col scroll-smooth space-x-4"
+            >
               {events?.map((item, index) => (
                 <EveCard item={item} key={index} />
               ))}
             </div>
           </div>
           <IconButton
+            id="left-button"
             className="bg-gray-200"
             sx={{
               position: 'absolute',
               top: '120px',
               left: '-20px'
             }}
+            onClick={() => handleArrowButtonClicked('left')}
           >
             <ArrowBackIosNewRoundedIcon />
           </IconButton>
+
           <IconButton
+            id="right-buttom"
             className="bg-gray-200"
             sx={{
               position: 'absolute',
               top: '120px',
               right: '-20px'
             }}
+            onClick={() => handleArrowButtonClicked('right')}
           >
             <ArrowForwardIosRoundedIcon />
           </IconButton>

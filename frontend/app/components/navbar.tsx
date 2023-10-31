@@ -7,20 +7,30 @@ import CustomButton from './button';
 import Image from 'next/image';
 import { useAuth } from '@/Contexts/Auth';
 import { ListItemButton } from '@mui/material';
+import { useRouter } from 'next/navigation';
 
 const navigation = [
   { name: 'Dashboard', href: '/dashboard' },
   { name: 'Events', href: '/events' }
 ];
 
-const menu = ['Profile', 'Settings', 'Logout'];
+const menu = [
+  { name: 'Profile', href: '/' },
+  { name: 'Your Events', href: '/events/myevents' },
+  { name: 'Settings', href: '/settings' },
+  { name: 'Logout' }
+];
 
 export default function NavBar() {
   const { user, logout } = useAuth();
+  const router = useRouter();
 
-  const handleItemClicked = (item: string) => {
-    if (item === 'Logout') {
+  const handleItemClicked = (item: any) => {
+    if (item.name === 'Logout') {
       logout();
+    }
+    if (item.name === 'Your Events') {
+      router.push(item.href);
     }
   };
 
@@ -52,6 +62,7 @@ export default function NavBar() {
                     alt="Company"
                     width={12}
                     height={12}
+                    priority
                   />
                 </div>
                 <div className="hidden sm:ml-6 sm:flex justify-center items-center">
@@ -118,7 +129,7 @@ export default function NavBar() {
                                 <ListItemButton
                                   onClick={() => handleItemClicked(item)}
                                 >
-                                  {item}
+                                  {item.name}
                                 </ListItemButton>
                               )}
                             </Menu.Item>
