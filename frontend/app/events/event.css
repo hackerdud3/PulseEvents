@@ -3,7 +3,7 @@
   transition: transform 1000ms ease 0s;
   overscroll-behavior-x: contain;
   padding: 0px;
-  display: grid;
+
   grid-auto-flow: column;
   transform: initial;
 }
@@ -12,7 +12,6 @@
   scroll-behavior: smooth;
   transition: transform 1000ms ease 0s;
   overscroll-behavior-x: contain;
-  display: grid;
   grid-auto-flow: column;
   transform: initial;
 }

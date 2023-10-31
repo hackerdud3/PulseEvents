@@ -45,6 +45,7 @@ const AddEvent = () => {
     const formDataToSend = new FormData();
     formDataToSend.append('eventImage', image); // Append the file
     formDataToSend.append('eventData', JSON.stringify(formData));
+    formDataToSend.append('token', token);
 
     try {
       const response = await axios.post(

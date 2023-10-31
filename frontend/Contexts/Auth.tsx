@@ -126,7 +126,11 @@ function AuthProvider({ children }: Props) {
     logout
   };
 
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={value}>
+      {!sessionLoading && children}
+    </AuthContext.Provider>
+  );
 }
 
 export default AuthProvider;
