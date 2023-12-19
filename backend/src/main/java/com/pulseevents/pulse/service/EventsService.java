@@ -1,7 +1,9 @@
 package com.pulseevents.pulse.service;
 
 import com.pulseevents.pulse.model.Events;
+import com.pulseevents.pulse.model.User;
 import com.pulseevents.pulse.repository.EventsRepo;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,8 +15,13 @@ public class EventsService {
     @Autowired
     private EventsRepo repo;
 
+
     public List<Events> getAllEvents() {
         return repo.findAll();
+    }
+
+    public List<Events> getMyEvents(String userId){
+        return repo.findByUserId(userId);
     }
 
     public Events addEvent(Events events) {

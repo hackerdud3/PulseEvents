@@ -1,17 +1,17 @@
 package com.pulseevents.pulse.model;
 
-import jakarta.annotation.Generated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
-import org.bson.types.Binary;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
-import org.springframework.data.mongodb.core.mapping.FieldType;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
+
 
 @Document(collection = "events")
 public class Events {
@@ -20,43 +20,70 @@ public class Events {
     private String  eid;
     private String event_name;
 
+    private String userId;
+
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private Date createdDate = new Date();
+
+
     private String venue;
-    private boolean attending;
+
+    private List<Interested> attending;
     private int num_attending;
 
-    private Binary eventImage;
+    private String month;
 
-    public Binary getEventImage() {
-        return eventImage;
-    }
+    private String date;
 
-    public void setEventImage(Binary eventImage) {
-        this.eventImage = eventImage;
-    }
+    private String day;
 
-    public Events() {
-        this.attending = false;
-    }
+    private String time;
 
-    public Events(String eid, String event_name, Date createdDate, String venue, boolean attending, int num_attending, Binary eventImage) {
+    private byte[] eventImage;
+
+    public Events(String eid, String event_name, String userId, Date createdDate, String venue, List<Interested> attending, int num_attending, String month, String date, String day, String time, byte[] eventImage) {
         this.eid = eid;
         this.event_name = event_name;
+        this.userId = userId;
         this.createdDate = createdDate;
         this.venue = venue;
         this.attending = attending;
         this.num_attending = num_attending;
+        this.month = month;
+        this.date = date;
+        this.day = day;
+        this.time = time;
         this.eventImage = eventImage;
     }
 
-
-    public Date getCreatedDate() {
-        return createdDate;
+    @Override
+    public String toString() {
+        return "Events{" +
+                "eid='" + eid + '\'' +
+                ", event_name='" + event_name + '\'' +
+                ", userId='" + userId + '\'' +
+                ", createdDate=" + createdDate +
+                ", venue='" + venue + '\'' +
+                ", attending=" + attending +
+                ", num_attending=" + num_attending +
+                ", month='" + month + '\'' +
+                ", date='" + date + '\'' +
+                ", day='" + day + '\'' +
+                ", time='" + time + '\'' +
+                ", eventImage=" + Arrays.toString(eventImage) +
+                '}';
     }
 
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public Events() {
+        this.attending = new ArrayList<>();
     }
 
     public String getEid() {
@@ -75,6 +102,22 @@ public class Events {
         this.event_name = event_name;
     }
 
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+
     public String getVenue() {
         return venue;
     }
@@ -83,11 +126,11 @@ public class Events {
         this.venue = venue;
     }
 
-    public boolean isAttending() {
+    public List<Interested> getAttending() {
         return attending;
     }
 
-    public void setAttending(boolean attending) {
+    public void setAttending(List<Interested> attending) {
         this.attending = attending;
     }
 
@@ -99,16 +142,35 @@ public class Events {
         this.num_attending = num_attending;
     }
 
-    @Override
-    public String toString() {
-        return "Events{" +
-                "eid='" + eid + '\'' +
-                ", event_name='" + event_name + '\'' +
-                ", createdDate=" + createdDate +
-                ", venue='" + venue + '\'' +
-                ", attending=" + attending +
-                ", num_attending=" + num_attending +
-                ", eventImage=" + eventImage +
-                '}';
+    public String getMonth() {
+        return month;
+    }
+
+    public void setMonth(String month) {
+        this.month = month;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getDay() {
+        return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
+    }
+
+    public byte[] getEventImage() {
+        return eventImage;
+    }
+
+    public void setEventImage(byte[] eventImage) {
+        this.eventImage = eventImage;
     }
 }

@@ -3,6 +3,8 @@ package com.pulseevents.pulse.service;
 import com.pulseevents.pulse.model.User;
 import com.pulseevents.pulse.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -22,4 +24,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         User user = userRepo.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("User Not Found with username " + username));
         return UserDetailsImpl.build(user);
     }
+
+
 }

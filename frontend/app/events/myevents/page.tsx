@@ -1,7 +1,7 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import useFetch from '@/Hooks/fetchUserEve';
-import EveCard from '@/app/components/card';
+import EveCard from '@/app/components/EventCard/card';
 import { Box } from '@mui/material';
 
 const Page = () => {
@@ -36,9 +36,17 @@ const Page = () => {
         <div className="w-full justify-end items-start">
           <h1 className="text-2xl font-semibold mb-4">Your Created Events</h1>
           <div className="flex flex-wrap items-center gap-4">
-            {events?.map((item, index) => (
-              <EveCard item={item} key={index}></EveCard>
-            ))}
+            {events?.length > 0 ? (
+              <div>
+                {events?.map((item, index) => (
+                  <EveCard item={item} key={index}></EveCard>
+                ))}
+              </div>
+            ) : (
+              <div>
+                <h1>You have no created events</h1>
+              </div>
+            )}
           </div>
         </div>
       </div>
