@@ -25,7 +25,6 @@ public class Events {
     private Date startDate;
     private Date endDate;
     private String createdBy;
-
     private Binary eventImage;
     private int interestedCount;
     @CreatedDate
