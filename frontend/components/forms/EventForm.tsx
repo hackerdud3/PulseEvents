@@ -13,7 +13,7 @@ import {
   Textarea,
   TimeInput
 } from '@nextui-org/react';
-import { useAuth } from '../../contexts/Auth';
+import { useAuth } from '@/providers/auth-provider';
 import CustomMap from '../MapCustom';
 import FormLoading from './FormLoading';
 import { useJsApiLoader } from '@react-google-maps/api';
