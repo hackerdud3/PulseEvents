@@ -30,8 +30,6 @@ public class EventsController {
     public ResponseEntity<Events> addEvent(@RequestParam("event") String eventJson,
                                            @RequestParam("file") MultipartFile file) throws IOException {
         Events event = new ObjectMapper().readValue(eventJson, Events.class);
-
-        event.setStartDate(new Date(eventJson.startDate));
         event.setCreatedAt(new Date());
         if (!file.isEmpty()) {
             event.setEventImage(new Binary(file.getBytes()));
