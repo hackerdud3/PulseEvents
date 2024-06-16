@@ -1,7 +1,7 @@
 'use client';
 import React, { FormEvent } from 'react';
 import { Button, Input, Link } from '@nextui-org/react';
-import { useAuth } from '../../contexts/Auth';
+import { useAuth } from '@/providers/auth-provider';
 
 type Props = {};
 
