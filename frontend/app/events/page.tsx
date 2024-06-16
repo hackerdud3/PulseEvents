@@ -1,5 +1,4 @@
 import React from 'react';
-import Link from 'next/link';
 import { Binary } from 'bson';
 import EventCard from '../../components/EventCard';
 import LandingImage from '../../components/LandingImage';
