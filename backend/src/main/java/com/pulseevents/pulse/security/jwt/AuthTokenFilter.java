@@ -1,6 +1,6 @@
 package com.pulseevents.pulse.security.jwt;
 
-import com.pulseevents.pulse.service.UserDetailsServiceImpl;
+import com.pulseevents.pulse.services.UserDetailsServiceImpl;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

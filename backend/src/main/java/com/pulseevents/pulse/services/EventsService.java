@@ -1,6 +1,6 @@
-package com.pulseevents.pulse.service;
+package com.pulseevents.pulse.services;
 
-import com.pulseevents.pulse.model.Events;
+import com.pulseevents.pulse.models.Events;
 import com.pulseevents.pulse.repository.EventsRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +20,7 @@ public class EventsService {
     public Events addEvent(Events events) {
         return repo.insert(events);
     }
+
 
     public Optional<Events> getEvent(String eid) {
         return repo.findById(eid);

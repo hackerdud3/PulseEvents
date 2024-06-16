@@ -1,4 +1,4 @@
-package com.pulseevents.pulse.model;
+package com.pulseevents.pulse.models;
 
     public enum ERole{
         ROLE_USER,

@@ -1,7 +1,7 @@
-package com.pulseevents.pulse.service;
+package com.pulseevents.pulse.services;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.pulseevents.pulse.model.User;
+import com.pulseevents.pulse.models.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

@@ -1,4 +1,4 @@
-package com.pulseevents.pulse.model;
+package com.pulseevents.pulse.models;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;

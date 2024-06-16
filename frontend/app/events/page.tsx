@@ -10,10 +10,10 @@ type Props = {};
 
 type Event = {
   eid: string;
-  event_name: string;
+  : string;
   venue: string;
   isAttending: boolean;
-  num_attending: number;
+  interestedCount: number;
 };
 
 async function fetchEvents() {
@@ -70,7 +70,7 @@ function EventsPage({}: Props) {
               <CardMedia component="img" src="/event1.jpg" />
               <CardContent sx={{ flex: "1 0 auto" }}>
                 <Typography component="div" variant="h4">
-                  {item.event_name}
+                  {item.}
                 </Typography>
               </CardContent>
             </Card>

@@ -1,4 +1,4 @@
-package com.pulseevents.pulse.model;
+package com.pulseevents.pulse.models;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -26,8 +26,6 @@ public class User {
     private String password;
 
     private Set<Role> roles = new HashSet<>();
-
-
 
     public Set<Role> getRoles() {
         return roles;
