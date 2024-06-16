@@ -1,5 +1,7 @@
-import Image from 'next/image';
+import React from 'react';
 
-export default function Home() {
+type Props = {};
+
+const page = (props: Props) => {
   return <main></main>;
-}
+};

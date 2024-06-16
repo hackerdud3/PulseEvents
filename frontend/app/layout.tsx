@@ -1,7 +1,7 @@
 import './globals.css';
 import { Inter } from 'next/font/google';
 import { Metadata } from 'next';
-import AuthProvider from '../contexts/Auth';
+import AuthProvider from '@/providers/auth-provider';
 import { UIProvider } from '../providers/next-ui-provider';
 import NavigationBar from '../components/NavigationBar';
 import { SnackbarProvider } from '../providers/snackbar-provider';
