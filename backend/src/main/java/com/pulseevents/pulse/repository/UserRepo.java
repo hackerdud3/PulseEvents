@@ -1,6 +1,6 @@
 package com.pulseevents.pulse.repository;
 
-import com.pulseevents.pulse.model.User;
+import com.pulseevents.pulse.models.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.Optional;

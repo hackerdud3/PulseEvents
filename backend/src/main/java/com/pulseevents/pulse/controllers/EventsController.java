@@ -1,17 +1,19 @@
 package com.pulseevents.pulse.controllers;
 
-import com.pulseevents.pulse.model.Events;
-import com.pulseevents.pulse.service.EventsService;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.pulseevents.pulse.models.Events;
+import com.pulseevents.pulse.services.EventsService;
+import org.bson.BsonBinarySubType;
 import org.bson.types.Binary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.IOException;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 public class EventsController {
@@ -24,15 +26,23 @@ public class EventsController {
         return eventsService.getAllEvents();
     }
 
-    @PostMapping(value = "/addevent")
-    public ResponseEntity<Events> addEvent(@RequestParam("eventImage") MultipartFile file, @RequestBody Events events) throws IOException {
-        Binary eventImage = new Binary(file.getBytes());
-        events.setEventImage(eventImage);
-        Events savedEvent = eventsService.addEvent(events);
-        return ResponseEntity.ok(savedEvent);
+    @PostMapping("/events/add_event")
+    public ResponseEntity<Events> addEvent(@RequestParam("event") String eventJson,
+                                           @RequestParam("file") MultipartFile file) throws IOException {
+        Events event = new ObjectMapper().readValue(eventJson, Events.class);
+        event.setCreatedAt(new Date());
+        if (!file.isEmpty()) {
+            event.setEventImage(new Binary(file.getBytes()));
+        }
+        Events savedEvent = eventsService.addEvent(event);
+        return new ResponseEntity<>(savedEvent, HttpStatus.CREATED);
     }
 
-    @GetMapping(value = "/event/{eid}")
+    /**
+     * Get event with event id
+     * @param eid;
+     **/
+    @GetMapping(value = "/events/{eid}")
     public ResponseEntity<Events> getSingleEvent(@PathVariable("eid") String eid) {
         Optional<Events> optionalEvent = eventsService.getEvent(eid);
         if (optionalEvent.isPresent()) {
@@ -43,16 +53,24 @@ public class EventsController {
         }
     }
 
-    @PutMapping(value = "/event/{eid}")
+    /**
+     * Update event with event id, takes updated event from the request
+     * @param eid;
+     * @param updatedEvent;
+     * */
+    @PutMapping(value = "/events/{eid}")
     public ResponseEntity<Events> updateEvent(@PathVariable("eid") String eid, @RequestBody Events updatedEvent) {
         Optional<Events> optionalEvent = eventsService.getEvent(eid);
         if (optionalEvent.isPresent()) {
             Events event = optionalEvent.get();
-            event.setEvent_name(updatedEvent.getEvent_name() != null ? updatedEvent.getEvent_name() : event.getEvent_name());
+            event.setEventName(updatedEvent.getEventName() != null ? updatedEvent.getEventName() : event.getEventName());
             event.setVenue(updatedEvent.getVenue() != null ? updatedEvent.getVenue() : event.getVenue());
-            event.setAttending(updatedEvent.isAttending());
-            event.setCreatedDate(updatedEvent.getCreatedDate());
-            event.setNum_attending(updatedEvent.getNum_attending());
+            event.setInterestedCount(updatedEvent.getInterestedCount());
+            event.setDescription(updatedEvent.getDescription() != null ? updatedEvent.getDescription() : event.getDescription());
+            event.setStartDate(updatedEvent.getStartDate() != null ? updatedEvent.getStartDate() : event.getStartDate());
+            event.setEndDate(updatedEvent.getEndDate() != null ? updatedEvent.getEndDate() : event.getEndDate());
+            event.setCategories(updatedEvent.getCategories());
+            event.setCreatedBy(updatedEvent.getCreatedBy() != null ? updatedEvent.getCreatedBy() : event.getCreatedBy());
             Events savedEvent = eventsService.saveEvent(event);
             return ResponseEntity.ok(savedEvent);
         } else {
@@ -60,6 +78,10 @@ public class EventsController {
         }
     }
 
+    /**
+     * Delete event with event id
+     * @param eid;
+     * */
     @DeleteMapping(value = "/events/{eid}")
     public ResponseEntity<String> deleteEvent(@PathVariable("eid") String eid){
         eventsService.delete(eid);

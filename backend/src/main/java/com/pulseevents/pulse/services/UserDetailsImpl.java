@@ -1,7 +1,7 @@
-package com.pulseevents.pulse.service;
+package com.pulseevents.pulse.services;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.pulseevents.pulse.model.User;
+import com.pulseevents.pulse.models.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -92,10 +92,10 @@ public class UserDetailsImpl implements UserDetails {
     public boolean equals(Object obj) {
         if(this == obj)
             return true;
-       if(obj == null || getClass() != obj.getClass())
-       { return false; }
-       UserDetailsImpl user = (UserDetailsImpl) obj;
-       return Objects.equals(id, user.id);
+        if(obj == null || getClass() != obj.getClass())
+        { return false; }
+        UserDetailsImpl user = (UserDetailsImpl) obj;
+        return Objects.equals(id, user.id);
     }
 
 

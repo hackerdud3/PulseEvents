@@ -1,7 +1,7 @@
 package com.pulseevents.pulse.repository;
 
-import com.pulseevents.pulse.model.ERole;
-import com.pulseevents.pulse.model.Role;
+import com.pulseevents.pulse.models.ERole;
+import com.pulseevents.pulse.models.Role;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.Optional;
