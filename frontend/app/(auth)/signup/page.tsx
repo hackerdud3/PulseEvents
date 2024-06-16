@@ -3,7 +3,7 @@ import React, { FormEvent } from 'react';
 import Link from 'next/link';
 
 import axios from 'axios';
-import { useAuth } from '../../../contexts/Auth';
+import { useAuth } from '../../../contexts/auth-provider';
 import CustomButton from '../../../components/button';
 import SignUp from '../../../components/auth-components/Signup';
 import { Card, CardHeader } from '@nextui-org/react';
