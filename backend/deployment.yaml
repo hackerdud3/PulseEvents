@@ -15,5 +15,5 @@ spec:
     spec:
       containers:
         - name: app
-          image: gcr.io/pulse-events-426723/pulse-events-gke-image:1.0.0
+          image: gcr.io/pulse-events-426723/pulse-events-gke-image:TAG
           imagePullPolicy: Always
