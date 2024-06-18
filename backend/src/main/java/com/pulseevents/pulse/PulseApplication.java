@@ -10,7 +10,7 @@ public class PulseApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(PulseApplication.class, args);
-		System.out.println("events pulse");
+		System.out.println("Application Started!");
 	}
 
 }
