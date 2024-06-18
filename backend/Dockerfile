@@ -7,10 +7,10 @@ FROM openjdk:17-jdk-slim
 WORKDIR /app
 
 # Copy the JAR file from your build output to the container
-COPY target/pulse-0.0.1-SNAPSHOT.jar /app/pulse-events.jar
+COPY target/pulse-backend-0.0.1-SNAPSHOT.jar /app/pulse-events-backend.jar
 
 # Expose the port your application will use
 EXPOSE 8080
 
 # Define the command to run your application
-CMD ["java", "-jar", "pulse-events.jar"]
+CMD ["java", "-jar", "pulse-events-backend.jar"]
