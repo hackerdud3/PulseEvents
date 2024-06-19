@@ -4,10 +4,6 @@ on:
   push:
     branches:
       - master
-    paths:
-      - "backend/**"
-      - "frontend/**"
-
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
   GKE_CLUSTER: pulse-events-cluster
@@ -61,3 +57,4 @@ jobs:
           kustomize build backend | kubectl apply -f -
           kubectl rollout status deployment/$DEPLOYMENT_NAME
           kubectl get services -o wide
+
