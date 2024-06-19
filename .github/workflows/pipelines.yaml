@@ -59,7 +59,7 @@ jobs:
 
       - name: Deploy Image to GKE cluster
         run: |
-          sed -i "s@gcr.io/PROJECT_ID/IMAGE:TAG@gcr.io/$PROJECT_ID/$IMAGE:$TAG@g" backend/deployment.yaml
-          kustomize build backend | kubectl apply -f -
+          sed -i "s@gcr.io/PROJECT_ID/IMAGE:TAG@gcr.io/$PROJECT_ID/$IMAGE:$TAG@g" ./deployment.yaml
+          kustomize build . | kubectl apply -f -
           kubectl rollout status deployment/$DEPLOYMENT_NAME
           kubectl get services -o wide
