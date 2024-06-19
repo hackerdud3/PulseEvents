@@ -4,9 +4,7 @@ on:
   push:
     branches:
       - master
-    paths:
-      - "backend/**"
-      - "frontend/**"
+
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
   GKE_CLUSTER: pulse-events-cluster
@@ -32,6 +30,7 @@ jobs:
           settings-path: ${{ github.workspace }}
 
       - name: Build with Maven
+        working-directory: ./backend   # Change directory to the backend submodule
         run: mvn clean package -DskipTests
 
       - name: Setup Google Cloud CLI
