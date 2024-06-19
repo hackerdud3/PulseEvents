@@ -58,8 +58,8 @@ jobs:
           mv kustomize /usr/local/bin
 
       - name: Deploy Image to GKE cluster
-        run: |
-          sed -i "s@gcr.io/PROJECT_ID/IMAGE:TAG@gcr.io/$PROJECT_ID/$IMAGE:$TAG@g" ./deployment.yaml
-          kustomize build . | kubectl apply -f -
+        run: |-
+          ./kustomize edit set image gcr.io/PROJECT_ID/IMAGE:TAG=gcr.io/$PROJECT_ID/$IMAGE:$TAG
+          ./kustomize build . | kubectl apply -f -
           kubectl rollout status deployment/$DEPLOYMENT_NAME
           kubectl get services -o wide
