@@ -1,7 +1,7 @@
 
 
-# Use JDK 24 as base image
-FROM openjdk:24-jdk-slim
+# Use JDK 17 as base image
+FROM openjdk:17-jdk-slim
 
 ARG JAR_FILE=target/pulse-backend-0.0.1-SNAPSHOT.jar
 
