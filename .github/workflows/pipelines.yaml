@@ -9,7 +9,7 @@ env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
   GKE_CLUSTER: pulse-events-cluster
   GKE_ZONE: northamerica-northeast1
-  DEPLOYMENT_NAME: backend-deployment
+  DEPLOYMENT_NAME: pulse-events-backend
   IMAGE: backend-image
   TAG: latest
 
@@ -43,11 +43,6 @@ jobs:
         with:
           project_id: ${{ secrets.GKE_PROJECT }}
 
-      - name: Install gke-gcloud-auth-plugin
-        run: |
-          sudo apt-get update
-          sudo apt-get install google-cloud-sdk-gke-gcloud-auth-plugin
-
       - name: Configure Docker
         run: |
           gcloud --quiet auth configure-docker
@@ -64,7 +59,6 @@ jobs:
 
       - name: Authenticate kubectl with GKE
         run: |
-          echo 'export USE_GKE_GCLOUD_AUTH_PLUGIN=True' >> $GITHUB_ENV
           gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE --project $PROJECT_ID
 
       - name: Deploy Image to GKE cluster

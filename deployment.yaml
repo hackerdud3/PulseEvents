@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: pulse-events
+  name: pulse-events-backend
 
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: pulse-events
+      app: pulse-events-backend
   template:
     metadata:
       labels:
-        app: pulse-events
+        app: pulse-events-backend
     spec:
       containers:
         - name: app
-          image: gcr.io/pulse-events-426723/backend-image:1.0.0
+          image: gcr.io/PROJECT_ID/IMAGE:TAG
           imagePullPolicy: Always
