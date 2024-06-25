@@ -13,8 +13,8 @@ public class EventsService {
     @Autowired
     private EventsRepo repo;
 
-    public List<Events> getAllEvents() {
-        return repo.findAll();
+    public List<Events> getAllEventsSortedByStartDate() {
+        return repo.findAllByOrderByStartDate();
     }
 
     public Events addEvent(Events events) {

@@ -23,7 +23,7 @@ public class EventsController {
 
     @GetMapping(value = "/events")
     public List<Events> allEvents() {
-        return eventsService.getAllEvents();
+        return eventsService.getAllEventsSortedByStartDate();
     }
 
     @PostMapping("/events/add_event")
