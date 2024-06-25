@@ -20,3 +20,12 @@ spec:
           image: gcr.io/PROJECT_ID/IMAGE:TAG
           ports:
             - containerPort: 8080
+          env:
+            - name: SPRING_DATA_MONGODB_URI
+              value: "${SPRING_DATA_MONGODB_URI}"
+            - name: SPRING_DATA_MONGODB_DATABASE
+              value: "${SPRING_DATA_MONGODB_DATABASE}"
+            - name: JWT_SECRET_KEY
+              value: "${JWT_SECRET_KEY}"
+            - name: JWT_EXPIRATION
+              value: "${JWT_EXPIRATION}"

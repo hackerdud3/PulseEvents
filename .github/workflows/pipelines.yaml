@@ -48,6 +48,11 @@ jobs:
           gcloud --quiet auth configure-docker
 
       - name: Build Docker Image
+        env:
+          SPRING_DATA_MONGODB_URI: ${{ secrets.MONGODB_URI }}
+          SPRING_DATA_MONGODB_DATABASE: ${{ secrets.MONGODB_DATABASE }}
+          JWT_SECRET_KEY: ${{ secrets.JWT_SECRET_KEY }}
+          JWT_EXPIRATION: ${{ secrets.JWT_EXPIRATION }}
         run: |
           docker build -t "gcr.io/$PROJECT_ID/$IMAGE:$TAG" ./backend
           docker push "gcr.io/$PROJECT_ID/$IMAGE:$TAG"
