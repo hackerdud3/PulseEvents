@@ -20,8 +20,8 @@ jobs:
     environment: production
 
     permissions:
-      contents: 'read'
-      id-token: 'write'
+      contents: "read"
+      id-token: "write"
 
     steps:
       - name: Checkout Repository
@@ -38,7 +38,7 @@ jobs:
         working-directory: ./backend
         run: mvn clean package -DskipTests
 
-      - id: 'auth'
+      - id: "auth"
         uses: google-github-actions/auth@v0
         with:
           credentials_json: ${{ secrets.GKE_SA_KEY }}
@@ -52,11 +52,9 @@ jobs:
         run: |
           gcloud --quiet auth configure-docker
 
-      - name: Set up GKE credentials
-        uses: google-github-actions/get-gke-credentials@v0
-        with:
-          cluster_name: ${GKE_CLUSTER}
-          location: ${GKE_ZONE}
+      - name: Get GKE Credentials
+        run: |-
+          gcloud container clusters get-credentials "$GKE_CLUSTER" --zone "$GKE_ZONE"
 
       - name: Build Docker Image
         env:
