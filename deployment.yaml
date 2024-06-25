@@ -16,7 +16,7 @@ spec:
         app: "pulse-backend-deployment"
     spec:
       containers:
-        - name: "pulse-backend-image-sha256-1"
+        - name: "pulse-backend-image"
           image: gcr.io/PROJECT_ID/IMAGE:TAG
           ports:
             - containerPort: 8080
