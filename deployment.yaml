@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: "pulse-backend-image"
-          image: gcr.io/PROJECT_ID/IMAGE:TAG
+          image: gcr.io/PROJECT_ID/IMAGE:GITHUB_SHA
           ports:
             - containerPort: 8080
           env:
