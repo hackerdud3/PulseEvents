@@ -8,8 +8,8 @@ on:
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
   GKE_CLUSTER: pulse-events-cluster
-  GKE_ZONE: northamerica-northeast1
-  DEPLOYMENT_NAME: backend-deployment
+  GKE_ZONE: us-central1
+  DEPLOYMENT_NAME: pulse-backend-deployment
   IMAGE: pulse-backend-image
   TAG: 1.0.0
 
