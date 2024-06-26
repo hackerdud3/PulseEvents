@@ -16,17 +16,18 @@ import java.util.*;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
+@RequestMapping("api/events")
 public class EventsController {
 
     @Autowired
     private EventsService eventsService;
 
-    @GetMapping(value = "/events")
+    @GetMapping(value = "/get_all_events")
     public List<Events> allEvents() {
         return eventsService.getAllEventsSortedByStartDate();
     }
 
-    @PostMapping("/events/add_event")
+    @PostMapping("/add_event")
     public ResponseEntity<Events> addEvent(@RequestParam("event") String eventJson,
                                            @RequestParam("file") MultipartFile file) throws IOException {
         Events event = new ObjectMapper().readValue(eventJson, Events.class);
@@ -42,7 +43,7 @@ public class EventsController {
      * Get event with event id
      * @param eid;
      **/
-    @GetMapping(value = "/events/{eid}")
+    @GetMapping(value = "/{eid}")
     public ResponseEntity<Events> getSingleEvent(@PathVariable("eid") String eid) {
         Optional<Events> optionalEvent = eventsService.getEvent(eid);
         if (optionalEvent.isPresent()) {
@@ -58,7 +59,7 @@ public class EventsController {
      * @param eid;
      * @param updatedEvent;
      * */
-    @PutMapping(value = "/events/{eid}")
+    @PutMapping(value = "/{eid}")
     public ResponseEntity<Events> updateEvent(@PathVariable("eid") String eid, @RequestBody Events updatedEvent) {
         Optional<Events> optionalEvent = eventsService.getEvent(eid);
         if (optionalEvent.isPresent()) {
@@ -82,7 +83,7 @@ public class EventsController {
      * Delete event with event id
      * @param eid;
      * */
-    @DeleteMapping(value = "/events/{eid}")
+    @DeleteMapping(value = "/{eid}")
     public ResponseEntity<String> deleteEvent(@PathVariable("eid") String eid){
         eventsService.delete(eid);
         String message = "Successfully deleted the event";
