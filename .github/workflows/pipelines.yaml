@@ -28,9 +28,7 @@ jobs:
       - id: auth
         uses: "google-github-actions/auth@v1"
         with:
-          token_format: "access_token"
-          workload_identity_provider: "projects/277010735959/locations/global/workloadIdentityPools/githubactions/providers/github"
-          service_account: "pulse-1135@pulse-events-426723.iam.gserviceaccount.com"
+          credentials_json: ${{ secrets.GKE_SA_KEY }}
 
       - name: Setup Google Cloud CLI
         uses: google-github-actions/setup-gcloud@v1
