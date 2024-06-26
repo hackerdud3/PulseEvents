@@ -3,6 +3,7 @@ kind: Service
 metadata:
   name: pulse-backend-service
   namespace: default
+  type: LoadBalancer
   labels:
     app: pulse-backend
 spec:

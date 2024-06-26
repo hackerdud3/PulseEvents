@@ -1,31 +1,43 @@
-apiVersion: "apps/v1"
-kind: "Deployment"
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: "pulse-backend-deployment"
-  namespace: "default"
+  name: pulse-backend-server
+  namespace: default
   labels:
-    app: "pulse-backend-deployment"
+    app: pulse-backend-server
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
-      app: "pulse-backend-deployment"
+      app: pulse-backend-server
   template:
     metadata:
       labels:
-        app: "pulse-backend-deployment"
+        app: pulse-backend-server
     spec:
       containers:
-        - name: "pulse-backend-image"
+        - name: pulse-events-image
           image: gcr.io/PROJECT_ID/IMAGE:GITHUB_SHA
           ports:
             - containerPort: 8080
           env:
             - name: SPRING_DATA_MONGODB_URI
-              value: "${SPRING_DATA_MONGODB_URI}"
+              valueFrom:
+                secretKeyRef:
+                  name: pulse-backend-secrets
+                  key: SPRING_DATA_MONGODB_URI
             - name: SPRING_DATA_MONGODB_DATABASE
-              value: "${SPRING_DATA_MONGODB_DATABASE}"
+              valueFrom:
+                secretKeyRef:
+                  name: pulse-backend-secrets
+                  key: SPRING_DATA_MONGODB_DATABASE
             - name: JWT_SECRET_KEY
-              value: "${JWT_SECRET_KEY}"
+              valueFrom:
+                secretKeyRef:
+                  name: pulse-backend-secrets
+                  key: JWT_SECRET_KEY
             - name: JWT_EXPIRATION
-              value: "${JWT_EXPIRATION}"
+              valueFrom:
+                secretKeyRef:
+                  name: pulse-backend-secrets
+                  key: JWT_EXPIRATION
