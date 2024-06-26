@@ -10,7 +10,7 @@ env:
   GKE_CLUSTER: pulse-events-cluster # Cluster name
   GKE_ZONE: us-central1 # Cluster zone
   DEPLOYMENT_NAME: pulse-backend-server # Deployment name
-  IMAGE: pulse-events-image
+  IMAGE: pulse-events-backend-image
 
 jobs:
   setup-build-publish-deploy:
