@@ -22,9 +22,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - uses: "google-github-actions/auth@v2"
+      - id: auth
+        uses: "google-github-actions/auth@v2"
         with:
           project_id: ${{env.PROJECT_ID}}
+          token_format: "access_token"
           workload_identity_provider: "projects/277010735959/locations/global/workloadIdentityPools/githubactions/providers/github"
           service_account: "pulse-1135@pulse-events-426723.iam.gserviceaccount.com"
 
