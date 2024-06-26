@@ -25,6 +25,9 @@ jobs:
     steps:
       - uses: "actions/checkout@v4"
 
+      - name: Build with Maven
+        run: mvn clean package -DskipTests
+
       - id: auth
         uses: "google-github-actions/auth@v1"
         with:
