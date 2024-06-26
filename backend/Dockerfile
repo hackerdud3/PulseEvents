@@ -10,7 +10,7 @@ WORKDIR /app
 COPY target/pulse-backend-0.0.1-SNAPSHOT.jar /app/app.jar
 
 # Copy the env.properties file into the container at /app
-COPY /src/main/resources/application.properties /app/application.properties
+COPY /env.properties /app/env.properties
 
 # Expose the port that your Spring Boot application listens on (default 8080)
 EXPOSE 8080
