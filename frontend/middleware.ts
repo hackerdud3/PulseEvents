@@ -1,7 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-import jwt from 'jsonwebtoken';
-
-const secret = process.env.JWT_SECRET;
 
 export default function middleware(req: NextRequest) {
   const publicRoutes = ['/events', '/signin', '/signup'];
@@ -30,16 +27,6 @@ export default function middleware(req: NextRequest) {
 
   // For non-public routes, check if the user is authenticated
   if (!token) {
-    return NextResponse.redirect(new URL('/signin', req.url));
-  }
-
-  // Verify the token
-  try {
-    if (secret) {
-      jwt.verify(token, secret);
-      return NextResponse.next();
-    }
-  } catch (error) {
     return NextResponse.redirect(new URL('/signin', req.url));
   }
 }

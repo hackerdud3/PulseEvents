@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.4",
     "@heroicons/react": "^2.0.18",
     "@internationalized/date": "^3.5.4",
     "@mui/icons-material": "^5.14.13",
