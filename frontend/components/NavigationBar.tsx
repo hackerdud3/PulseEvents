@@ -1,4 +1,4 @@
-'use client';
+// components/NavigationBar.tsx
 import React from 'react';
 import {
   Navbar,
@@ -7,22 +7,29 @@ import {
   NavbarItem,
   Link,
   Input,
-  DropdownItem,
-  DropdownTrigger,
-  Dropdown,
-  DropdownMenu,
-  Avatar,
   Button
 } from '@nextui-org/react';
 import { SearchIcon } from '../constants/SearchIcon';
 import { AddIcon } from '../constants/AddIcon';
+import DropDown from './DropDown';
+import { getUserCookie } from '@/utils/cookieUtils';
+import Cookies from 'js-cookie';
+import { cookies } from 'next/headers';
+import Image from 'next/image';
 
 interface NavigationProps {
   name: string;
   href: string;
 }
 
-export default function NavigationBar() {
+type Props = {};
+
+export default function NavigationBar(props: Props) {
+  const userCookie = getUserCookie();
+  const token = cookies().get('token');
+  console.log(userCookie);
+  console.log(token);
+
   const navigation: NavigationProps[] = [
     {
       name: 'Dashboard',
@@ -33,8 +40,19 @@ export default function NavigationBar() {
       href: '/events'
     }
   ];
+
   return (
-    <Navbar isBordered>
+    <Navbar isBordered maxWidth="full">
+      <NavbarBrand>
+        <Link href="/" color="foreground">
+          <Image
+            alt="pulse-logo"
+            width={50}
+            height={50}
+            src="../pulse-black.svg"
+          />
+        </Link>
+      </NavbarBrand>
       <NavbarContent justify="start">
         <NavbarContent className="flex gap-3">
           {navigation.map((item) => (
@@ -67,36 +85,13 @@ export default function NavigationBar() {
           </Link>
         </div>
         <div>
-          <Dropdown placement="bottom-end">
-            <DropdownTrigger>
-              <Avatar
-                isBordered
-                as="button"
-                className="transition-transform"
-                color="secondary"
-                name="Jason Hughes"
-                size="sm"
-                src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
-              />
-            </DropdownTrigger>
-            <DropdownMenu aria-label="Profile Actions" variant="flat">
-              <DropdownItem key="profile" className="h-14 gap-2">
-                <p className="font-semibold">Signed in as</p>
-                <p className="font-semibold">zoey@example.com</p>
-              </DropdownItem>
-              <DropdownItem key="settings">My Settings</DropdownItem>
-              <DropdownItem key="team_settings">Team Settings</DropdownItem>
-              <DropdownItem key="analytics">Analytics</DropdownItem>
-              <DropdownItem key="system">System</DropdownItem>
-              <DropdownItem key="configurations">Configurations</DropdownItem>
-              <DropdownItem key="help_and_feedback">
-                Help & Feedback
-              </DropdownItem>
-              <DropdownItem key="logout" color="danger">
-                Log Out
-              </DropdownItem>
-            </DropdownMenu>
-          </Dropdown>
+          {userCookie ? (
+            <DropDown userCookie={userCookie} />
+          ) : (
+            <Link href="/signin">
+              <Button color="primary">Sign In</Button>
+            </Link>
+          )}
         </div>
       </NavbarContent>
     </Navbar>

@@ -54,8 +54,8 @@ function SignUp({}: Props) {
 
         <div className="flex flex-col items-center justify-center w-full gap-2">
           <p className="text-small">Or</p>
-          <Link href="#">
-            <p className="text-small">Login</p>
+          <Link href="/signin">
+            <p className="text-small">Sign-in</p>
           </Link>
         </div>
       </div>

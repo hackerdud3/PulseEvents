@@ -18,12 +18,7 @@ const Login = (props: Props) => {
       username: formData.get('username') as string,
       password: formData.get('password') as string
     };
-    try {
-      await signInWithUsernameandPassword(userData);
-      router.push('/events');
-    } catch (error) {
-      console.log(error);
-    }
+    await signInWithUsernameandPassword(userData);
   };
 
   return (
@@ -47,6 +42,12 @@ const Login = (props: Props) => {
             <p className="text-small">Forgot Password</p>
           </Link>
         </div>
+      </div>
+      <div className="flex flex-col mt-2 items-center justify-center w-full gap-2">
+        <p className="text-small">Or</p>
+        <Link href="/signup">
+          <p className="text-small">Singup</p>
+        </Link>
       </div>
     </form>
   );

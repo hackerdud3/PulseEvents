@@ -6,6 +6,7 @@ import { UIProvider } from '../providers/next-ui-provider';
 import NavigationBar from '../components/NavigationBar';
 import { SnackbarProvider } from '../providers/snackbar-provider';
 import { redirect } from 'next/navigation';
+import { cookies } from 'next/headers';
 
 const inter = Inter({ subsets: ['latin'] });
 

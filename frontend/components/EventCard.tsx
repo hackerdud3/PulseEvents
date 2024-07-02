@@ -4,7 +4,8 @@ import React from 'react';
 import { HeartIcon } from '../constants/HeartIcon';
 import { LocationIcon } from '../constants/LocationIcon';
 import { UserIcon } from '../constants/UserIcon';
-import { CalendarDate, parseAbsoluteToLocal } from '@internationalized/date';
+import { useRouter } from 'next/navigation';
+import { formatDateTime } from '@/utils/formatDateTime';
 
 type Props = {
   event: any;
@@ -13,64 +14,29 @@ type Props = {
 const EventCard = (props: Props) => {
   const [liked, setLiked] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(true);
+  const router = useRouter();
   const { event } = props;
+  // Extract start and end date string from event object
   const startDateStr = event?.startDate;
   const endDateStr = event?.endDate;
-
+  // Convert start and end date string to Date object
   const startDate = new Date(startDateStr);
   const endDate = new Date(endDateStr);
 
-  // Function to format date and time
-  const formatDateTime = (date: Date) => {
-    // Months array (0-indexed)
-    const months = [
-      'Jan',
-      'Feb',
-      'Mar',
-      'Apr',
-      'May',
-      'Jun',
-      'Jul',
-      'Aug',
-      'Sep',
-      'Oct',
-      'Nov',
-      'Dec'
-    ];
-
-    // Days of the week array
-    const daysOfWeek = [
-      'Sunday',
-      'Monday',
-      'Tuesday',
-      'Wednesday',
-      'Thursday',
-      'Friday',
-      'Saturday'
-    ];
-
-    // Get components of the date
-    const month = months[date.getUTCMonth()]; // Get abbreviated month name
-    const dayOfMonth = date.getUTCDate(); // Get day of the month
-    const dayOfWeek = daysOfWeek[date.getUTCDay()]; // Get full day name
-    const hours = date.getUTCHours(); // Get hours (0-23)
-    const minutes = date.getUTCMinutes(); // Get minutes
-
-    console.log(date.getUTCDay());
-
-    // Format hours to 12-hour format with AM/PM
-    const ampm = hours >= 12 ? 'PM' : 'AM';
-    const formattedHours = hours % 12 === 0 ? 12 : hours % 12; // Convert midnight (0) to 12
-    const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes; // Ensure minutes are two digits
-
-    // Construct the formatted date and time string
-    const formattedDateTime = `${month} ${dayOfMonth}, ${dayOfWeek}, ${formattedHours}:${formattedMinutes}${ampm}`;
-
-    return formattedDateTime;
-  };
-
   // Format start date and time
   const formattedStartDate = formatDateTime(startDate);
+  // Construct the formatted date and time string
+  const formattedStartDateTime = `${formattedStartDate.month}
+   ${formattedStartDate.dayOfMonth}, ${formattedStartDate.dayOfWeek}, ${formattedStartDate.formattedHours}:${formattedStartDate.formattedMinutes}${formattedStartDate.ampm}`;
+  // Format end date and time
+  const formattedEndDate = formatDateTime(endDate);
+
+  const formattedEndDateTime = `${formattedEndDate.month} ${formattedEndDate.dayOfMonth}, ${formattedEndDate.dayOfWeek}, ${formattedEndDate.formattedHours}:${formattedEndDate.formattedMinutes}${formattedEndDate.ampm}`;
+
+  // On pressing the event card navigate to the event page
+  const handlePress = () => {
+    router.push(`/event/${event?.eid}`);
+  };
 
   return (
     <Card
@@ -79,10 +45,13 @@ const EventCard = (props: Props) => {
       className="bg-background/80dark:bg-default-100/50 w-full border border-gray-300"
       style={{ width: '100%' }}
       isPressable
-      onPress={() => console.log('Card pressed')}
+      onPress={() => {
+        handlePress();
+      }}
     >
       <CardBody>
         <div className="grid grid-cols-6 md:grid-cols-12 gap-8 md:gap-4 items-start justify-center">
+          {/* Event Image */}
           <div className="relative col-span-6 md:col-span-4 h-full w-full">
             <Image
               alt="Card background"
@@ -115,11 +84,9 @@ const EventCard = (props: Props) => {
                     ))}
                   </div>
                 </div>
-                <h2 className=" text-9xl font-semibold mt-2">
-                  {event?.eventName}
-                </h2>
+                <h2 className=" text-3xl font-bold mt-2">{event?.eventName}</h2>
                 <h3 className="font-semibold text-foreground/60">
-                  {formattedStartDate}
+                  {formattedStartDateTime}
                 </h3>
                 <div className="flex items-center justify-start gap-2 mt-2">
                   <UserIcon />
@@ -131,7 +98,7 @@ const EventCard = (props: Props) => {
                 <div className="flex gap-2 items-start justify-start mt-2">
                   <LocationIcon />
                   <p className="text-small text-foreground/80 w-full ">
-                    {event?.venue}
+                    {event?.address?.formattedAddress}
                   </p>
                 </div>
                 <div className="flex flex-col items-start justify-center mt-2"></div>
