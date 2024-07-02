@@ -21,7 +21,7 @@ public class Events {
     private String  eid;
     private String eventName;
     private String description;
-    private String venue;
+    private Object address;
     private Date startDate;
     private Date endDate;
     private String createdBy;
@@ -32,11 +32,11 @@ public class Events {
     private Date createdAt;
     private List<String> categories;
 
-    public Events(String eid, String eventName, String description, String venue, Date startDate, Date endDate, String createdBy, Binary eventImage, int interestedCount, Date createdAt, List<String> categories) {
+    public Events(String eid, String eventName, String description, Object address, Date startDate, Date endDate, String createdBy, Binary eventImage, int interestedCount, Date createdAt, List<String> categories) {
         this.eid = eid;
         this.eventName = eventName;
         this.description = description;
-        this.venue = venue;
+        this.address = address;
         this.startDate = startDate;
         this.endDate = endDate;
         this.createdBy = createdBy;
@@ -73,12 +73,12 @@ public class Events {
         this.description = description;
     }
 
-    public String getVenue() {
-        return venue;
+    public Object getAddress() {
+        return address;
     }
 
-    public void setVenue(String venue) {
-        this.venue = venue;
+    public void setAddress(Object address) {
+        this.address = address;
     }
 
     public Date getStartDate() {

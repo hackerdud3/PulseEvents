@@ -65,7 +65,7 @@ public class EventsController {
         if (optionalEvent.isPresent()) {
             Events event = optionalEvent.get();
             event.setEventName(updatedEvent.getEventName() != null ? updatedEvent.getEventName() : event.getEventName());
-            event.setVenue(updatedEvent.getVenue() != null ? updatedEvent.getVenue() : event.getVenue());
+            event.setAddress(updatedEvent.getAddress() != null ? updatedEvent.getAddress() : event.getAddress());
             event.setInterestedCount(updatedEvent.getInterestedCount());
             event.setDescription(updatedEvent.getDescription() != null ? updatedEvent.getDescription() : event.getDescription());
             event.setStartDate(updatedEvent.getStartDate() != null ? updatedEvent.getStartDate() : event.getStartDate());
