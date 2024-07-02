@@ -21,11 +21,12 @@ export default function AuthLayout({
         <div className="flex flex-col gap-4 justify-center items-center w-full">
           <div>
             <Image
-              src="./pulse-black.svg"
+              src="./pulse-events.png"
               className="rounded-none
           "
               width={100}
               height={100}
+              alt="Pulse Logo"
             />
           </div>
           {children}
