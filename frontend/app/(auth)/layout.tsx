@@ -22,8 +22,7 @@ export default function AuthLayout({
           <div>
             <Image
               src="./pulse-events.png"
-              className="rounded-none
-          "
+              className="rounded-none"
               width={100}
               height={100}
               alt="Pulse Logo"
