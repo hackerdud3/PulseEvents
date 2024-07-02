@@ -9,7 +9,7 @@ interface Event {
   eid: string;
   eventName: string;
   description: string;
-  venue: string;
+  address: Object;
   startDate: string;
   endDate: string;
   createdBy: string;
@@ -17,11 +17,13 @@ interface Event {
   eventImage: Binary | null;
   categories: string[];
 }
-
 async function fetchEvents() {
-  const response = await fetch('http://localhost:8080/events', {
-    cache: 'no-cache'
-  });
+  const response = await fetch(
+    'http://localhost:8080/api/events/get_all_events',
+    {
+      cache: 'no-cache'
+    }
+  );
   if (!response.ok) {
     throw new Error('Failed to fetch events');
   }
@@ -30,7 +32,6 @@ async function fetchEvents() {
 
 async function EventsPage({}: Props) {
   const events = await fetchEvents();
-  console.log(events);
 
   return (
     <div className="flex flex-col item-center justify-center w-full p-2">
