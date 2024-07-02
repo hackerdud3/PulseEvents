@@ -6,8 +6,9 @@ type Props = {};
 
 const LandingImage = (props: Props) => {
   const [isLoading, setIsLoading] = React.useState(true);
+
   return (
-    <div className=" w-full p-4">
+    <div className="w-full p-4">
       <Card
         isHoverable
         isFooterBlurred
@@ -36,7 +37,7 @@ const LandingImage = (props: Props) => {
             <Image alt="Pulse icon" src="../pulse-black.svg" width={50} />
             <div className="flex flex-col">
               <p className="text-tiny text-black">Breathing App</p>
-              <p className="text-tiny text-black">Get a good night's sleep.</p>
+              <p className="text-tiny text-black">Get</p>
             </div>
           </div>
           <Button radius="full" size="sm">
